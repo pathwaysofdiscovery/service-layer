@@ -13,13 +13,10 @@ public class LoginResponse {
 
     private String userEmail;
     private boolean authenticatied;
-    private String url;
 
-    public LoginResponse(String userEmail, boolean authenticatied, String url) {
+    public LoginResponse(String userEmail, boolean authenticated) {
         this.userEmail = userEmail;
-        this.authenticatied = authenticatied;
-        this.url = url;
-
+        this.authenticatied = authenticated;
     }
 
     @JsonProperty
@@ -28,13 +25,8 @@ public class LoginResponse {
     }
 
     @JsonProperty
-    public boolean isAuthenticatied() {
+    public boolean isAuthenticated() {
         return authenticatied;
-    }
-
-    @JsonProperty
-    public String getUrl() {
-        return url;
     }
 
 }
