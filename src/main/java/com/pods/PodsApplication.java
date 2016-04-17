@@ -25,8 +25,8 @@ public class PodsApplication extends Application<PodsAppConfiguration> {
     }
 
     public void run(PodsAppConfiguration podsAppConfiguration, Environment environment) throws Exception {
-        environment.jersey().register(new AuthResources(dbm.getUserMapper()));
-        environment.jersey().register(new UserResources(dbm.getUserMapper()));
+//        environment.jersey().register(new AuthResources(dbm.getUserMapper()));
+//        environment.jersey().register(new UserResources(dbm.getUserMapper()));
         environment.jersey().register(new TopicResources(dbm.getTopicMapper(), dbm.getTopicDao()));
         environment.jersey().register(new NodeResources(dbm.getNodeMapper(), dbm.getNodeByTopicMapper(),dbm.getNodeDao()));
         environment.jersey().register(new ResourceResources(dbm.getResourceMapper(),dbm.getResourceDao()));

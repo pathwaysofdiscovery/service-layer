@@ -31,6 +31,17 @@ public class ResourceResources {
         this.resourceDao = resourceDao;
     }
 
+
+    @GET
+    @Path("/resource/{resource_id}")
+    @Consumes({"application/json"})
+    @Produces({"application/json"})
+    @Timed
+    public ResourceResponse getResource(@PathParam("resource_id") String resourceId) {
+        Resource resource = resourceMapper.get(UUID.fromString(resourceId));
+        return new ResourceResponse(resource,uriInfo.getBaseUri()+"api/resource/"+resourceId);
+    }
+
     @POST
     @Path("/resources/create")
     @Consumes({"application/json"})

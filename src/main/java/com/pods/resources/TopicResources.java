@@ -39,7 +39,7 @@ public class TopicResources {
     }
 
     @POST
-    @Path("/topic/create")
+    @Path("/topics/create")
     @Consumes({"application/json"})
     @Produces({"application/json"})
     @Timed
@@ -60,14 +60,11 @@ public class TopicResources {
                 );
     }
 
-    @POST
-    @Path("/topics/search")
-    @Consumes({"application/json"})
+    @GET
+    @Path("/topics")
     @Produces({"application/json"})
     @Timed
-    public SearchTopicsResponse searchTopics(String req) {
-        Gson gson = new Gson();
-        SearchTopicsRequest request = gson.fromJson(req,SearchTopicsRequest.class);
+    public SearchTopicsResponse searchTopics() {
 
         ArrayList<TopicResponse> matchingTopics = topicDao.getAllTopics()
                 .stream()

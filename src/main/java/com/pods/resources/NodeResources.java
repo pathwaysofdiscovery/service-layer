@@ -98,28 +98,28 @@ public class NodeResources {
         return new NodeResponse(node,uriInfo.getBaseUri()+"api/node/" + nodeId);
     }
 
-
-    @POST
-    @Path("/nodes/connect-pre/{id}")
-    @Consumes({"application/json"})
-    @Produces({"application/json"})
-    @Timed
-    public NodeResponse connectPrereqNode(@PathParam("id") UUID nodeId, String req) {
-        Gson gson = new Gson();
-        ConnectPrereqNodeRequest request = gson.fromJson(req,ConnectPrereqNodeRequest.class);
-
-        return new NodeResponse(new Node(), uriInfo.getBaseUri()+"api/node/"  + nodeId);
-    }
-
-    @POST
-    @Path("/node/connect-post/{id}")
-    @Consumes({"application/json"})
-    @Produces({"application/json"})
-    @Timed
-    public NodeResponse connectLeadsToNode(@PathParam("id") UUID nodeId, String req) {
-        return new NodeResponse(new Node(), uriInfo.getBaseUri()+"api/node/"  + nodeId);
-        // TODO: implement me
-    }
-
+//
+//    @POST
+//    @Path("/nodes/connect-pre/{id}")
+//    @Consumes({"application/json"})
+//    @Produces({"application/json"})
+//    @Timed
+//    public NodeResponse connectPrereqNode(@PathParam("id") UUID nodeId, String req) {
+//        Gson gson = new Gson();
+//        ConnectPrereqNodeRequest request = gson.fromJson(req,ConnectPrereqNodeRequest.class);
+//
+//        return new NodeResponse(new Node(), uriInfo.getBaseUri()+"api/node/"  + nodeId);
+//    }
+//
+//    @POST
+//    @Path("/node/connect-post/{id}")
+//    @Consumes({"application/json"})
+//    @Produces({"application/json"})
+//    @Timed
+//    public NodeResponse connectLeadsToNode(@PathParam("id") UUID nodeId, String req) {
+//        return new NodeResponse(new Node(), uriInfo.getBaseUri()+"api/node/"  + nodeId);
+//        // TODO: implement me
+//    }
+//
 
 }
