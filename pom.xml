@@ -63,12 +63,12 @@
             <artifactId>assertj-core-java8</artifactId>
             <version>1.0.0m1</version>
         </dependency>
-        <dependency>
-            <groupId>com.bluecatcode.guava</groupId>
-            <artifactId>guava-19.0-extended</artifactId>
-            <version>1.0.4</version>
-        </dependency>
 
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>19.0</version>
+        </dependency>
 
     </dependencies>
 
@@ -116,6 +116,7 @@
                                     <mainClass>com.pods.PodsApplication</mainClass>
                                 </transformer>
                             </transformers>
+                            <minimizeJar>false</minimizeJar>
                         </configuration>
                     </execution>
                 </executions>
