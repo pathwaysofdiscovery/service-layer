@@ -11,7 +11,6 @@
     <url>http://github.com/pathwaysofdiscovery</url>
 
     <properties>
-        <dropwizard.version>1.0.0-rc2</dropwizard.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
@@ -20,7 +19,7 @@
         <dependency>
             <groupId>io.dropwizard</groupId>
             <artifactId>dropwizard-core</artifactId>
-            <version>${dropwizard.version}</version>
+            <version>1.0.0-rc2</version>
         </dependency>
 
         <dependency>
@@ -64,6 +63,12 @@
             <artifactId>assertj-core-java8</artifactId>
             <version>1.0.0m1</version>
         </dependency>
+        <dependency>
+            <groupId>com.bluecatcode.guava</groupId>
+            <artifactId>guava-19.0-extended</artifactId>
+            <version>1.0.4</version>
+        </dependency>
+
 
     </dependencies>
 
