@@ -3,6 +3,9 @@ package com.pods;
 import com.pods.db.CassandraContext;
 import com.pods.db.DbMappers;
 import com.pods.resources.AuthResources;
+import com.pods.resources.NodeResources;
+import com.pods.resources.TopicResources;
+import com.pods.resources.UserResources;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Environment;
 
@@ -26,6 +29,9 @@ public class PodsApplication extends Application<PodsAppConfiguration> {
 
     public void run(PodsAppConfiguration podsAppConfiguration, Environment environment) throws Exception {
         environment.jersey().register(new AuthResources(dbm.getUserMapper()));
+        environment.jersey().register(new UserResources(dbm.getUserMapper()));
+        environment.jersey().register(new TopicResources(dbm.getTopicMapper(), dbm.getTopicDao()));
+        environment.jersey().register(new NodeResources(dbm.getNodeMapper()));
     }
 
 }

@@ -3,12 +3,12 @@ package com.example.views;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
-public class ErrorView extends View {
+public class ErrorView {
     private final Exception exception;
     private final String stackTrace;
 
     public ErrorView(Exception e, String template) {
-        super(template);
+//        super(template);
         this.exception = e;
 
         final StringWriter sw = new StringWriter();

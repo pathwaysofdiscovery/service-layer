@@ -8,6 +8,7 @@ import com.pods.models.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -23,7 +24,7 @@ public class TopicDao {
     }
 
     public List<Topic> getAllTopics() {
-        List<Topic> topicList = new Arraylist<>();
+        List<Topic> topicList = new ArrayList<>();
         ResultSet rs = session.execute(getAllTopicsStmt);
         for (Row r : rs) {
             topicList.add(populateTopic(r));
@@ -37,11 +38,6 @@ public class TopicDao {
         return populateTopic(r);
 
     }
-
-    public boolean putTopic(String name) {
-        new UUID()
-    }
-
 
     private Topic populateTopic(Row r) {
         Topic t = new Topic();

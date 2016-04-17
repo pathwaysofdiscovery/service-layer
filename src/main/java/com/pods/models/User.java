@@ -7,7 +7,7 @@ import com.datastax.driver.mapping.annotations.Table;
 /**
  * Any user
  */
-@Table(keyspace="pods", table="users")
+@Table(keyspace="pods",name="users")
 public class User {
 
     @PartitionKey

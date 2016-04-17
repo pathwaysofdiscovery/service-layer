@@ -4,8 +4,8 @@ import com.codahale.metrics.annotation.Timed;
 import com.datastax.driver.mapping.Mapper;
 import com.google.gson.Gson;
 import com.pods.models.User;
-import com.pods.req.AuthRequest;
 import com.pods.req.CreateUserRequest;
+import com.pods.resp.CreateUserResponse;
 import com.pods.resp.LoginResponse;
 
 import javax.ws.rs.Consumes;
@@ -36,20 +36,9 @@ public class UserResources {
     public CreateUserResponse createUser(String req) {
         Gson gson = new Gson();
         CreateUserRequest request = gson.fromJson(req,CreateUserRequest.class);
-
-        try {
-            userMapper.save(new User(request.getUserEmail(),request.getPassword()));
-        } catch (Exception e) {
-
-            e.printStackTrace();
-        }
-
-        User user = userMapper.get(request.getUserEmail());
-
-        return new LoginResponse(
-                request.getUserEmail(),
-                user.getPassword().equals(request.getPassword())
-        );
+        User user = new User(request.getUserEmail(), request.getPassword());
+        userMapper.save(user);
+        return new CreateUserResponse(user);
     }
 
 }

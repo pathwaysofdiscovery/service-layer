@@ -3,7 +3,6 @@ package com.pods.resources;
 import com.codahale.metrics.annotation.Timed;
 import com.datastax.driver.mapping.Mapper;
 import com.google.gson.Gson;
-import com.pods.db.UserDao;
 import com.pods.models.User;
 import com.pods.req.AuthRequest;
 import com.pods.resp.LoginResponse;
@@ -33,13 +32,14 @@ public class AuthResources {
     public LoginResponse getResponse(
             String req) {
         Gson gson = new Gson();
-        AuthRequest request = gson.fromJson(req,AuthRequest.class);
+        AuthRequest request = gson.fromJson(req, AuthRequest.class);
 
         User user = userMapper.get(request.getUserEmail());
 
         return new LoginResponse(
                 request.getUserEmail(),
-                request.getPassword().equals(user.getPassword());
+                request.getPassword().equals(user.getPassword())
+        );
     }
 
 }
