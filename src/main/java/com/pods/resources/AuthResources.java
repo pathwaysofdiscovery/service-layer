@@ -34,10 +34,10 @@ public class AuthResources {
         Gson gson = new Gson();
         AuthRequest request = gson.fromJson(req, AuthRequest.class);
 
-        User user = userMapper.get(request.getUserEmail());
+        User user = userMapper.get(request.getUsername());
 
         return new LoginResponse(
-                request.getUserEmail(),
+                request.getUsername(),
                 request.getPassword().equals(user.getPassword())
         );
     }

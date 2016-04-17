@@ -12,25 +12,20 @@ import com.google.gson.annotations.SerializedName;
 
  */
 public class AuthRequest {
-    @SerializedName("user_email") private final String userEmail;
+    @SerializedName("username") private final String username;
     @SerializedName("password") private final String password;
-    @SerializedName("url") private final String url;
 
-    public AuthRequest(String userEmail, String password, String url) {
-        this.userEmail = userEmail;
+    public AuthRequest(String username, String password) {
+        this.username = username;
         this.password = password;
-        this.url = url;
     }
 
-    public String getUserEmail() {
-        return userEmail;
+    public String getUsername() {
+        return username;
     }
 
     public String getPassword() {
         return password;
     }
 
-    public String getUrl() {
-        return url;
-    }
 }
