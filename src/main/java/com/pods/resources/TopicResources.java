@@ -13,7 +13,11 @@ import com.pods.resp.SearchTopicsResponse;
 import com.pods.resp.TopicResponse;
 
 import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.UriBuilder;
+import javax.ws.rs.core.UriInfo;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -24,6 +28,9 @@ public class TopicResources {
 
     private final Mapper<Topic> topicMapper;
     private final TopicDao topicDao;
+    @Context
+    UriInfo uriInfo;
+
 
     public TopicResources(Mapper<Topic> userMapper, TopicDao topicDao) {
         this.topicMapper = userMapper;
@@ -40,9 +47,16 @@ public class TopicResources {
         CreateTopicRequest request = gson.fromJson(req,CreateTopicRequest.class);
 
         UUID uuid = UUIDs.timeBased();
+        Topic topic = new Topic(request.getName(), request.getDescription(), uuid, request.getImageUrl());
+        topicMapper.save(topic);
 
-        topicMapper.save(new Topic(request.getName(),request.getDescription(),uuid,request.getImageUrl()));
-        return new CreateTopicResponse(request.getName(),request.getDescription(),request.getImageUrl(),uuid);
+        return new CreateTopicResponse(
+                request.getName(),
+                request.getDescription(),
+                request.getImageUrl(),
+                uuid,
+                uriInfo.getBaseUri()+"api/topic/" + uuid.toString()
+                );
     }
 
     @POST
@@ -56,8 +70,6 @@ public class TopicResources {
 
         ArrayList<Topic> matchingTopics = topicDao.getAllTopics()
                 .stream()
-                .filter(t -> t.getTopicName().matches(request.getSearchPattern()))
-                .filter(t -> t.getDescription().matches(request.getSearchPattern()))
                 .collect(Collectors.toCollection(ArrayList::new));
 
         return new SearchTopicsResponse(matchingTopics);
