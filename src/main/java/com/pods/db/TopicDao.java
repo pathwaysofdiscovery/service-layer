@@ -27,7 +27,8 @@ public class TopicDao {
         List<Topic> topicList = new ArrayList<>();
         ResultSet rs = session.execute(getAllTopicsStmt);
         for (Row r : rs) {
-            topicList.add(populateTopic(r));
+            Topic topic = populateTopic(r);
+            topicList.add(topic);
         }
         return topicList;
     }

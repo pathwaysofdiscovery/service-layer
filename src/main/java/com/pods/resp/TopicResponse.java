@@ -9,12 +9,14 @@ public class TopicResponse {
     private final UUID id;
     private final String description;
     private final String name;
+    private final String resourceUrl;
 
-    public TopicResponse(Topic topic) {
+    public TopicResponse(Topic topic, String resourceUrl) {
         this.id = topic.getId();
         this.description = topic.getDescription();
         this.name = topic.getTopicName();
         this.imageUrl = topic.getImageUrl();
+        this.resourceUrl = resourceUrl;
     }
 
     public String getImageUrl() {
@@ -32,4 +34,6 @@ public class TopicResponse {
     public String getName() {
         return name;
     }
+
+    public String getResourceUrl() { return resourceUrl; }
 }

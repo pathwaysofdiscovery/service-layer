@@ -68,8 +68,9 @@ public class TopicResources {
         Gson gson = new Gson();
         SearchTopicsRequest request = gson.fromJson(req,SearchTopicsRequest.class);
 
-        ArrayList<Topic> matchingTopics = topicDao.getAllTopics()
+        ArrayList<TopicResponse> matchingTopics = topicDao.getAllTopics()
                 .stream()
+                .map(t -> new TopicResponse(t,uriInfo.getBaseUri()+"api/topic/" + t.getId()))
                 .collect(Collectors.toCollection(ArrayList::new));
 
         return new SearchTopicsResponse(matchingTopics);
@@ -82,7 +83,7 @@ public class TopicResources {
     @Timed
     public TopicResponse getTopic(@PathParam("id") String uuid) {
         Topic topic = topicMapper.get(UUID.fromString(uuid));
-        return new TopicResponse(topic);
+        return new TopicResponse(topic,uriInfo.getBaseUri()+"api/topic/" + uuid.toString());
     }
 
 }
