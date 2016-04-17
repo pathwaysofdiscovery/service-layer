@@ -8,7 +8,9 @@ import com.pods.req.AuthRequest;
 import com.pods.resp.LoginResponse;
 
 import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.UriInfo;
 
 /**
  * Created by jshook on 4/16/16.
@@ -19,6 +21,9 @@ import javax.ws.rs.core.MediaType;
 public class AuthResources {
 
     private final Mapper<User> userMapper;
+
+    @Context
+    UriInfo uriInfo;
 
     public AuthResources(Mapper<User> userMapper) {
         this.userMapper = userMapper;

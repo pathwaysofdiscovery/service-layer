@@ -4,9 +4,7 @@ import com.datastax.driver.mapping.annotations.Column;
 import com.datastax.driver.mapping.annotations.PartitionKey;
 import com.datastax.driver.mapping.annotations.Table;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * A specific node within a topic
@@ -17,22 +15,25 @@ public class Node {
     @PartitionKey
     private UUID id;
     @Column(name="topic_id")
-    private UUID topic_id;
+    private UUID topicId;
     @Column(name="description")
     private String description;
     private String topicName;
     private int rating;
-    private List<UUID> prereqs = new ArrayList<UUID>();
-    private List<UUID> leadsto = new ArrayList<UUID>();
+    private Set<UUID> prereqs = new HashSet<UUID>();
+    private Set<UUID> leadsto = new HashSet<UUID>();
 
-    public Node(UUID id, UUID topic_id, String description, String topicName, int rating, List<UUID> prereqs, List<UUID> leadsto) {
+    public Node(UUID id, UUID topic_id, String description, String topicName, int rating, Set<UUID> prereqs, Set<UUID> leadsto) {
         this.id = id;
-        this.topic_id = topic_id;
+        this.topicId = topic_id;
         this.description = description;
         this.topicName = topicName;
         this.rating = rating;
         this.prereqs = prereqs;
         this.leadsto = leadsto;
+    }
+
+    public Node() {
     }
 
     public UUID getId() {
@@ -43,12 +44,12 @@ public class Node {
         this.id = id;
     }
 
-    public UUID getTopic_id() {
-        return topic_id;
+    public UUID getTopicId() {
+        return topicId;
     }
 
-    public void setTopic_id(UUID topic_id) {
-        this.topic_id = topic_id;
+    public void setTopicId(UUID topicId) {
+        this.topicId = topicId;
     }
 
     public String getDescription() {
@@ -75,19 +76,35 @@ public class Node {
         this.rating = rating;
     }
 
-    public List<UUID> getPrereqs() {
+    public Set<UUID> getPrereqs() {
         return prereqs;
     }
 
-    public void setPrereqs(List<UUID> prereqs) {
+    public void setPrereqs(Set<UUID> prereqs) {
         this.prereqs = prereqs;
     }
 
-    public List<UUID> getLeadsto() {
+    public Set<UUID> getLeadsto() {
         return leadsto;
     }
 
-    public void setLeadsto(List<UUID> leadsto) {
+    public void setLeadsto(Set<UUID> leadsto) {
         this.leadsto = leadsto;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Node node = (Node) o;
+
+        return id != null ? id.equals(node.id) : node.id == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        return id != null ? id.hashCode() : 0;
     }
 }

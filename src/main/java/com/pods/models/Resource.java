@@ -1,6 +1,7 @@
 package com.pods.models;
 
 import com.datastax.driver.mapping.annotations.ClusteringColumn;
+import com.datastax.driver.mapping.annotations.Column;
 import com.datastax.driver.mapping.annotations.PartitionKey;
 import com.datastax.driver.mapping.annotations.Table;
 
@@ -14,23 +15,32 @@ import java.util.UUID;
 public class Resource {
 
     @PartitionKey
-    private UUID node_id;
+    @Column(name="node_id")
+    private UUID nodeId;
     @ClusteringColumn
     private UUID id;
-    private UUID topic_id;
-    private String url;
+    @Column(name="topic_id")
+    private UUID topicId;
+    @Column(name="content_url")
+    private String contentUrl;
+    @Column(name="source")
     private String source;
+    @Column(name="rating")
     private int rating;
+    @Column(name="title")
     private String title;
 
-    public Resource(UUID id, UUID node_id, UUID topic_id, String url, String source, int rating, String title) {
+    public Resource(UUID id, UUID node_id, UUID topic_id, String contentUrl, String source, int rating, String title) {
         this.id = id;
-        this.node_id = node_id;
-        this.topic_id = topic_id;
-        this.url = url;
+        this.nodeId = node_id;
+        this.topicId = topic_id;
+        this.contentUrl = contentUrl;
         this.source = source;
         this.rating = rating;
         this.title = title;
+    }
+
+    public Resource() {
     }
 
     public UUID getId() {
@@ -41,28 +51,28 @@ public class Resource {
         this.id = id;
     }
 
-    public UUID getNode_id() {
-        return node_id;
+    public UUID getNodeId() {
+        return nodeId;
     }
 
-    public void setNode_id(UUID node_id) {
-        this.node_id = node_id;
+    public void setNodeId(UUID nodeId) {
+        this.nodeId = nodeId;
     }
 
-    public UUID getTopic_id() {
-        return topic_id;
+    public UUID getTopicId() {
+        return topicId;
     }
 
-    public void setTopic_id(UUID topic_id) {
-        this.topic_id = topic_id;
+    public void setTopicId(UUID topicId) {
+        this.topicId = topicId;
     }
 
-    public String getUrl() {
-        return url;
+    public String getContentUrl() {
+        return contentUrl;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setContentUrl(String contentUrl) {
+        this.contentUrl = contentUrl;
     }
 
     public String getSource() {

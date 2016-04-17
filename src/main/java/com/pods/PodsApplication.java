@@ -2,10 +2,7 @@ package com.pods;
 
 import com.pods.db.CassandraContext;
 import com.pods.db.DbMappers;
-import com.pods.resources.AuthResources;
-import com.pods.resources.NodeResources;
-import com.pods.resources.TopicResources;
-import com.pods.resources.UserResources;
+import com.pods.resources.*;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Environment;
 
@@ -31,7 +28,8 @@ public class PodsApplication extends Application<PodsAppConfiguration> {
         environment.jersey().register(new AuthResources(dbm.getUserMapper()));
         environment.jersey().register(new UserResources(dbm.getUserMapper()));
         environment.jersey().register(new TopicResources(dbm.getTopicMapper(), dbm.getTopicDao()));
-        environment.jersey().register(new NodeResources(dbm.getNodeMapper()));
+        environment.jersey().register(new NodeResources(dbm.getNodeMapper(), dbm.getNodeByTopicMapper(),dbm.getNodeDao()));
+        environment.jersey().register(new ResourceResources(dbm.getResourceMapper(),dbm.getResourceDao()));
     }
 
 }

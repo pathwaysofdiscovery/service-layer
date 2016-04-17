@@ -3,19 +3,19 @@ package com.pods.db;
 import com.datastax.driver.core.Session;
 import com.datastax.driver.mapping.Mapper;
 import com.datastax.driver.mapping.MappingManager;
-import com.pods.models.Node;
-import com.pods.models.Resource;
-import com.pods.models.Topic;
-import com.pods.models.User;
+import com.pods.models.*;
 
 public class DbMappers {
 
     private final Session session;
     private final Mapper<User> userMapper;
     private final Mapper<Topic> topicMapper;
-    private final Mapper<Node> NodeMapper;
+    private final Mapper<Node> nodeMapper;
+    private final Mapper<NodeByTopic> nodeByTopicMapper;
     private final Mapper<Resource> resourceMapper;
     private final TopicDao topicDao;
+    private final NodeDao nodeDao;
+    private final ResourceDao resourceDao;
 
     private MappingManager mappingManager;
 
@@ -24,9 +24,12 @@ public class DbMappers {
         this.mappingManager = new MappingManager(session);
         this.userMapper = mappingManager.mapper(User.class);
         this.topicMapper = mappingManager.mapper(Topic.class);
-        this.NodeMapper = mappingManager.mapper(Node.class);
+        this.nodeMapper = mappingManager.mapper(Node.class);
+        this.nodeByTopicMapper = mappingManager.mapper(NodeByTopic.class);
         this.resourceMapper = mappingManager.mapper(Resource.class);
         this.topicDao = new TopicDao(session);
+        this.nodeDao = new NodeDao(session);
+        this.resourceDao = new ResourceDao(session);
     }
 
     public Mapper<User> getUserMapper() {
@@ -38,8 +41,9 @@ public class DbMappers {
     }
 
     public Mapper<Node> getNodeMapper() {
-        return NodeMapper;
+        return nodeMapper;
     }
+    public Mapper<NodeByTopic> getNodeByTopicMapper() { return nodeByTopicMapper; }
 
     public Mapper<Resource> getResourceMapper() {
         return resourceMapper;
@@ -47,5 +51,13 @@ public class DbMappers {
 
     public TopicDao getTopicDao() {
         return topicDao;
+    }
+
+    public NodeDao getNodeDao() {
+        return nodeDao;
+    }
+
+    public ResourceDao getResourceDao() {
+        return resourceDao;
     }
 }

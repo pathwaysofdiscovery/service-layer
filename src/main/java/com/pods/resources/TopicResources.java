@@ -28,6 +28,7 @@ public class TopicResources {
 
     private final Mapper<Topic> topicMapper;
     private final TopicDao topicDao;
+
     @Context
     UriInfo uriInfo;
 
